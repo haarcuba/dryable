@@ -1,12 +1,12 @@
 from setuptools import setup, find_packages
 
-README = 'close remote SSH processes automatically'
+README = 'provide --dry-run functionality for your application'
 
 requires = []
 tests_require = [ 'pytest', ]
 
 setup(name='dryable',
-      version='0.2.0',
+      version='0.2.1',
       description=README,
       long_description=README,
       url='https://github.com/haarcuba/dryable',
