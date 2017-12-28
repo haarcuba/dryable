@@ -6,7 +6,7 @@ requires = []
 tests_require = [ 'pytest', ]
 
 setup(name='dryable',
-      version='0.1.2',
+      version='0.2.0',
       description=README,
       long_description=README,
       url='https://github.com/haarcuba/dryable',
