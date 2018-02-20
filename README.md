@@ -50,3 +50,24 @@ By default a `Dryable` decorated function will return `None` in dry-run mode. If
 def getPeopleFromDatabase():
     return actualQueryFromDB()
 ```
+
+## What If I Have Different Things I Want To Dry-Run?
+
+If you're using `dryable`, you may run into situations in which you want to dry-run some code, but not some other code.
+The way to handle this situation is with *labels*
+
+```python
+import dryable
+
+@dryable.Dryable( label = 'labelA' )
+def functionA():
+    print( "Hi, I am A" )
+
+@dryable.Dryable( label = 'labelB' )
+def functionB():
+    print( "Hi, I am B" )
+
+dryable.set( True, 'labelA' )
+functionA() # this will be dried up
+functionB() # this will run for real
+```
