@@ -1,4 +1,7 @@
 import dryable
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 @dryable.Dryable( label = 'labelA' )
 def functionA():

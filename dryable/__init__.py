@@ -23,7 +23,7 @@ class Dryable:
                 if len( kwargs ) > 0:
                     if len( args ) > 0:
                         kwargsString = ', {}'.format( kwargsString )
-                logging.info( 'dryable skip: {}( {}{} )'.format( function.__qualname__, argsString, kwargsString ) )
+                logging.info( 'dryable[{label}] skip: {function}( {args}{kwargs} )'.format( label = self._label, function = function.__qualname__, args = argsString, kwargs = kwargsString ) )
                 return self._value
             return function( * args, ** kwargs )
 
