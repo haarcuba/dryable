@@ -3,6 +3,7 @@ import collections
 
 class Dryable:
     _dryRun = collections.defaultdict( lambda: False )
+    logger = logging.getLogger( 'dryable' )
 
     def __init__( self, value = None, *, label = 'default' ):
         self._value = value
@@ -23,7 +24,7 @@ class Dryable:
                 if len( kwargs ) > 0:
                     if len( args ) > 0:
                         kwargsString = ', {}'.format( kwargsString )
-                logging.info( 'dryable[{label}] skip: {function}( {args}{kwargs} )'.format( label = self._label, function = function.__qualname__, args = argsString, kwargs = kwargsString ) )
+                Dryable.logger.info( 'dryable[{label}] skip: {function}( {args}{kwargs} )'.format( label = self._label, function = function.__qualname__, args = argsString, kwargs = kwargsString ) )
                 return self._value
             return function( * args, ** kwargs )
 

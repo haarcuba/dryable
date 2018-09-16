@@ -71,3 +71,7 @@ dryable.set( True, 'labelA' )
 functionA() # this will be dried up
 functionB() # this will run for real
 ```
+
+### Logging
+
+Dryable logs to a logger called `dryable` which is available via `Dryable.logger`
