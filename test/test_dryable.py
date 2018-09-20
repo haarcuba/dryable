@@ -7,6 +7,7 @@ class MyClass:
 
     @dryable.Dryable()
     def callMe( self, what ):
+        """this is the correct docstring"""
         self.calls.append( what )
 
 class MyClassReturnsSomeValue:
@@ -42,6 +43,10 @@ def test_decorator( subject ):
         subject.callMe( x )
 
     assert subject.calls == []
+
+def test_decorator_leaves_docstring_intact_issue_2( subject ):
+    assert subject.callMe.__doc__ == "this is the correct docstring"
+    assert subject.callMe.__name__ == "callMe"
 
 def test_decorator_with_return_value( subjectReturnsSomeValue ):
     dryable.set( True )

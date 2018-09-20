@@ -28,6 +28,8 @@ class Dryable:
                 return self._value
             return function( * args, ** kwargs )
 
+        _decorated.__doc__ = function.__doc__
+        _decorated.__name__ = function.__name__
         return _decorated
 
 set = Dryable.set
