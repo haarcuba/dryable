@@ -1,5 +1,5 @@
 import collections
-from functools import wraps
+import functools
 import logging
 
 class Dryable:
@@ -18,7 +18,7 @@ class Dryable:
             cls._dryRun[ label ] = False
 
     def __call__( self, function ):
-        @wraps(function)
+        @functools.wraps( function )
         def _decorated( * args, ** kwargs ):
             if self._dryRun[ self._label ]:
                 argsString = ', '.join( [ str( argument ) for argument in args ] )
