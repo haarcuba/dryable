@@ -6,7 +6,7 @@ class MyClass:
         self.calls = []
 
     @dryable.Dryable()
-    def callMe( self, what ):
+    def callMe( self, what, * args, ** kwargs ):
         """this is the correct docstring"""
         self.calls.append( what )
 
@@ -40,7 +40,7 @@ def test_nonDryRun( subject ):
 def test_decorator( subject ):
     dryable.set( True )
     for x in range( 10 ):
-        subject.callMe( x )
+        subject.callMe( x, 1, 2, 3, x='x', y='y' )
 
     assert subject.calls == []
 
