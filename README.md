@@ -4,11 +4,31 @@ Sometimes we are want to check the basic logic of our
 programs without running certain operations that are lengthy and
 cause side effects.
 
+E.g. we would like some script to tell us what it *would have* done,
+but without actually doing it: a good example is when you have a script
+that is supposed to delete some old files or database entries, and you want to 
+use a "dry run" to see what it *would* do, before actually letting it loose.
+
+```shell
+$ ./my-deleting-script --dry-run # don't really delete anything, just show me
+```
+
+The problem with that sort of thing is that your code gets filled with
+annoying `if` statements like:
+```python
+if not dryRun:
+    doTheThing()
+else:
+    logTheThing()
+```
+
 This is precisely what `Dryable` is for. You set the "dry run" mode like this:
 
 ```python
 dryable.set( True ) # or False to turn it off
 ```
+
+Here's an example if how to use it:
  
 
 ```python
@@ -16,25 +36,27 @@ import dryable
 import requests
 import sys
 
-def runCalculations():
+def findOldFilesForDeletion():
     return [ 'some', 'results' ]
 
 @dryable.Dryable()
-def saveToRemoteDatabase( results ):
+def deleteFiles( results ):
     print( 'will now open an real world connection'
            'that requires a server and will make side effects' )
     requests.post( 'http://url.to.some.server/results', data = str( results ) )
 
 
-# the next line ensures that saveToRemoteDatabase
+# the next line ensures that deleteFiles
 # will not run if --dry-run is specified on the command line
 dryable.set( '--dry-run' in sys.argv )
-results = runCalculations()
+
+# now code as usual
+results = findOldFilesForDeletion()
 print( 'got: {}'.format( results ) )
-saveToRemoteDatabase( results )
+deleteFiles( results )
 ```
 
-## Intallation
+## Installation
 
 Install dryable like so
 
@@ -54,6 +76,7 @@ def getPeopleFromDatabase():
 ## What If I Have Different Things I Want To Dry-Run?
 
 If you're using `dryable`, you may run into situations in which you want to dry-run some code, but not some other code.
+E.g. you want to have `--dont-delete-files` and separately `--dont-save-to-db` or something.
 The way to handle this situation is with *labels*
 
 ```python
