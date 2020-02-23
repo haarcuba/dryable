@@ -6,13 +6,10 @@ requires = []
 tests_require = [ 'pytest', ]
 
 setup(name='dryable',
-      version='1.0.4',
+      version='1.0.5',
       description=README,
       long_description=README,
       url='https://github.com/haarcuba/dryable',
-      classifiers=[
-          "Programming Language :: Python",
-      ],
       author='Yoav Kleinberger',
       author_email='haarcuba@gmail.com',
       keywords='subprocess',
