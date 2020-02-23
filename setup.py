@@ -24,4 +24,10 @@ setup(name='dryable',
       },
       install_requires=requires,
       entry_points={},
+      classifiers = [
+            "Programming Language :: Python :: 3",
+            "Intended Audience :: Developers",
+            "License :: OSI Approved :: MIT License",
+            "Operating System :: OS Independent",
+         ]
       )
