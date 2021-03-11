@@ -6,9 +6,10 @@ class Dryable:
     _dryRun = collections.defaultdict( lambda: False )
     logger = logging.getLogger( 'dryable' )
 
-    def __init__( self, value = None, *, label = 'default' ):
+    def __init__( self, value = None, *, label = 'default', logging_msg = None):
         self._value = value
         self._label = label
+        self._logging_msg = logging_msg
 
     @classmethod
     def set( cls, value, label = 'default' ):
@@ -26,7 +27,9 @@ class Dryable:
                 if len( kwargs ) > 0:
                     if len( args ) > 0:
                         kwargsString = ', {}'.format( kwargsString )
-                Dryable.logger.info( 'dryable[{label}] skip: {function}( {args}{kwargs} )'.format( label = self._label, function = function.__qualname__, args = argsString, kwargs = kwargsString ) )
+                logging_msg = self._logging_msg or 'dryable[{label}] skip: {function}( {args}{kwargs} )'.format(
+                    label = self._label, function = function.__qualname__, args = argsString, kwargs = kwargsString )
+                Dryable.logger.info(logging_msg)
                 return self._value
             return function( * args, ** kwargs )
 
