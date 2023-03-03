@@ -115,7 +115,7 @@ Optionally, you may also inject the following patterns, which will be interprete
 
 | Placeholder      	    | Description                 	          |
 |-----------------------|-----------------------------------------|
-| `{label}`          	| Label defined in @Dryable()             |
+| `{label}`          	| Label defined in `@Dryable()`           |
 | `{function}`       	| Function name               	          |
 | `{args}`, `{kwargs}` 	| Args and kwargs passed to the function  |
 
