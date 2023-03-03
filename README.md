@@ -98,3 +98,30 @@ functionB() # this will run for real
 ### Logging
 
 Dryable logs to a logger called `dryable` which is available via `Dryable.logger`
+
+#### What If I want to log a dryable function with a custom message ?
+
+You can define a custom message using ` logging_msg` parameter:
+```
+import dryable
+
+@dryable.Dryable( logging_msg = 'Function A were not executed (--dry-run)' )
+def functionA():
+    print( "Hi, I am A" )
+```
+
+Alternatively you can also inject some decorators:
+
+| Placeholder      	| Description                 	      |
+|------------------	|-------------------------------------|
+| {label}          	| Label defined in @Dryable()         |
+| {function}       	| Function name               	      |
+| {args}, {kwargs} 	| Args passed to the function 	      |
+
+```
+import dryable
+
+@dryable.Dryable( logging_msg = 'Would have called {function} with args {args} (--dry-run)' )
+def functionA(paramA):
+    print( "Hi, I am A" )
+```
