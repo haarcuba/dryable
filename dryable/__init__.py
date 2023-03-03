@@ -28,7 +28,7 @@ class Dryable:
                     if len( args ) > 0:
                         kwargsString = ', {}'.format( kwargsString )
                 logging_msg = self._logging_msg or 'dryable[{label}] skip: {function}( {args}{kwargs} )'
-                logging_msg.format(
+                logging_msg = logging_msg.format(
                     label = self._label, function = function.__qualname__, args = argsString, kwargs = kwargsString )
                 Dryable.logger.info(logging_msg)
                 return self._value

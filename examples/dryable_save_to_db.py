@@ -1,4 +1,6 @@
 import dryable
+import logging
+
 import requests
 import sys
 
@@ -14,6 +16,7 @@ def saveToRemoteDatabase( results ):
 
 # the next line ensures that saveToRemoteDatabase
 # will not run if --dry-run is specified on the command line
+logging.basicConfig(level=logging.INFO)
 dryable.set( '--dry-run' in sys.argv )
 results = runCalculations()
 print( 'got: {}'.format( results ) )
